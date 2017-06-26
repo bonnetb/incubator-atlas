@@ -15,6 +15,7 @@
 
 # resolve links - $0 may be a softlink
 PRG="${0}"
+ARGS=$*
 
 while [ -h "${PRG}" ]; do
   ls=`ls -ld "${PRG}"`
@@ -87,7 +88,7 @@ export HIVE_CP
 echo Using Hive configuration directory [$HIVE_CP]
 echo "Logs for import are in $METADATA_LOG_DIR/import-hive.log"
 
-${JAVA_BIN} ${JAVA_PROPERTIES} -cp ${HIVE_CP}:${METADATACPPATH} org.apache.atlas.hive.bridge.HiveMetaStoreBridge
+${JAVA_BIN} ${JAVA_PROPERTIES} -cp ${HIVE_CP}:${METADATACPPATH} org.apache.atlas.hive.bridge.HiveMetaStoreBridge $ARGS
 
 RETVAL=$?
 [ $RETVAL -eq 0 ] && echo Hive Data Model imported successfully!!!
